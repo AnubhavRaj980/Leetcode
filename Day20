@@ -1,0 +1,33 @@
+Question
+
+https://leetcode.com/problems/merge-strings-alternately/submissions/936401257/
+
+Solution
+
+class Solution {
+    public String mergeAlternately(String word1, String word2) {
+        int l1 = word1.length();
+        int l2 = word2.length();
+        int run =0;
+        String s = "";
+
+        if(l1 > l2)
+        run = l1;
+        else
+        run =l2;
+
+        int a =0;
+
+        for(int i =0 ;i<run;i++)
+        {
+            if(i<l1)
+            s= s + word1.charAt(i);
+            if(a<l2)
+            {
+            s= s + word2.charAt(a);
+            a++;
+            }
+        }
+        return s;
+    }
+}
