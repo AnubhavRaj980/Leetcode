@@ -1,0 +1,25 @@
+import java.util.*;
+class Solution {
+    public void moveZeroes(int[] nums) {
+        int l = nums.length;
+        // int a =0;
+        int b = l;
+        outer :for(int i =0;i<b;i++)
+        {
+            if(nums[i]==0)
+            {
+                for(int j =i+1;j<b;j++)
+                {
+                    int t2 = nums[j];
+                    nums[j] = nums[j-1];
+                    nums[j-1] = t2;
+                    
+                }
+                // System.out.println(Arrays.toString(nums));
+                b--;
+                i--;
+                // break outer;
+            }
+        }
+    }
+}
