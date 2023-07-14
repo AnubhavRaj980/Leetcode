@@ -1,7 +1,8 @@
 class Solution {
     public static int majorityElement(int[] nums) {
         return helper(nums,0,nums[0]);
-    }static int helper(int[] nums, int si, int ref){
+    }
+static int helper(int[] nums, int si, int ref){
         int c=0;
         for(int i=si;i<nums.length;i++){
             if(nums[i]==ref)
@@ -18,7 +19,8 @@ class Solution {
         int[] nums=new int[s.length];
         for(int i=0;i<s.length;i++){
             nums[i]=Integer.parseInt(s[i]);
-        }majorityElement(nums);
+        }
+majorityElement(nums);
     }
 }
 
