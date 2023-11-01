@@ -1,35 +1,37 @@
-public class Solution {
+class Solution {
     public int[] findMode(TreeNode root) {
-        List<Integer> inorderr = new ArrayList<>();
-        inorder(root, inorderr);
+        Map<Integer, Integer> counts = new HashMap<>();
+        int[] maxCount = {0}; // Using an array to simulate nonlocal
+        List<Integer> modes = new ArrayList<>();
 
-        Map<Integer, Integer> freq = new HashMap<>();
-        int maxCount = 0;
+        inorder(root, counts, maxCount, modes);
 
-        for (int val : inorderr) {
-            freq.put(val, freq.getOrDefault(val, 0) + 1);
-            maxCount = Math.max(maxCount, freq.get(val));
+        int[] result = new int[modes.size()];
+        for (int i = 0; i < modes.size(); i++) {
+            result[i] = modes.get(i);
         }
 
-        List<Integer> result = new ArrayList<>();
-        for (Map.Entry<Integer, Integer> entry : freq.entrySet()) {
-            if (entry.getValue() == maxCount) {
-                result.add(entry.getKey());
-            }
-        }
-
-        int[] resultArray = new int[result.size()];
-        for (int i = 0; i < result.size(); i++) {
-            resultArray[i] = result.get(i);
-        }
-
-        return resultArray;
+        return result;        
     }
 
-    private void inorder(TreeNode root, List<Integer> result) {
-        if (root == null) return;
-        result.add(root.val);
-        inorder(root.left, result);
-        inorder(root.right, result);
-    }
+    private void inorder(TreeNode node, Map<Integer, Integer> counts, int[] maxCount, List<Integer> modes) {
+        if (node == null) {
+            return;
+        }
+
+        inorder(node.left, counts, maxCount, modes);
+
+        int count = counts.getOrDefault(node.val, 0) + 1;
+        counts.put(node.val, count);
+
+        if (count > maxCount[0]) {
+            maxCount[0] = count;
+            modes.clear();
+            modes.add(node.val);
+        } else if (count == maxCount[0]) {
+            modes.add(node.val);
+        }
+
+        inorder(node.right, counts, maxCount, modes);
+    }    
 }
